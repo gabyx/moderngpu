@@ -3,8 +3,16 @@ MARK_AS_ADVANCED( CMAKE_BUILD_TYPE )
 set(CMAKE_BUILD_TYPE Debug CACHE STRING "The build type for makefile based generators")
 
 
+
+
 #The name of the project
-PROJECT(ModernGPU)
+set(ModernGPUName "ModernGPU ${CMAKE_CXX_COMPILER_ID}")
+if(${CMAKE_GENERATOR} MATCHES "Unix Makefiles")
+        set(ModernGPUName  ${ModernGPUName}${CMAKE_BUILD_TYPE})
+endif()
+PROJECT(${ModernGPUName})
+
+
 
 #The CMake Minimum version that is required. The FindCUDA script
 #is distributed since version 2.8
