@@ -189,7 +189,7 @@ struct CTASegReduceLoad {
 
 ////////////////////////////////////////////////////////////////////////////////
 // KernelSegReduceCsr
-// Accepts CudaDeviceMem Ptrs
+// Accepts Device Ptrs (double * dev)
 template<typename Tuning, bool Indirect, typename CsrIt, typename SourcesIt,
 	typename InputIt, typename DestIt, typename T, typename Op>
 MGPU_LAUNCH_BOUNDS void KernelSegReduceCsr(CsrIt csr_global,
@@ -383,8 +383,7 @@ MGPU_HOST void SegReduceHost(InputIt data_global, CsrIt csr_global,
 	}
 }
 
-template<typename InputIt, typename CsrIt, typename OutputIt, typename T,
-	typename Op>
+template<typename InputIt, typename CsrIt, typename OutputIt, typename T, typename Op>
 MGPU_HOST void SegReduceCsr(InputIt data_global, CsrIt csr_global, int count,
 	int numSegments, bool supportEmpty, OutputIt dest_global, T identity, Op op,
 	CudaContext& context) {
